@@ -78,7 +78,7 @@ public class Form extends javax.swing.JFrame {
         fieldEmail = new javax.swing.JTextField();
         lblTglLhr4 = new javax.swing.JLabel();
         fieldTelpon = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableMouseClicked = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         save = new javax.swing.JButton();
         jenisKel = new javax.swing.JComboBox<>();
@@ -141,7 +141,12 @@ public class Form extends javax.swing.JFrame {
                 "No", "Nama", "Alamat", "Asal Sekolah", "Jenis Kelamin", "Email", "No. Telpon"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jTableMouseClicked.setViewportView(jTable1);
 
         save.setText("Save");
         save.addActionListener(new java.awt.event.ActionListener() {
@@ -169,7 +174,7 @@ public class Form extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTableMouseClicked, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(save)
                                 .addGroup(layout.createSequentialGroup()
@@ -223,7 +228,7 @@ public class Form extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(save)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTableMouseClicked, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(42, Short.MAX_VALUE))
         );
 
@@ -279,14 +284,30 @@ public class Form extends javax.swing.JFrame {
         } catch (Exception e) {
             Logger.getLogger(Form.class.getName()).log(Level.SEVERE, null, e);
         }
-
-            
-       
     }//GEN-LAST:event_saveActionPerformed
-
+    
     private void jenisKelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jenisKelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jenisKelActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int selectedRow = jTable1.getSelectedRow();
+        if(selectedRow != -1){
+            String nama = jTable1.getValueAt(selectedRow,1).toString();
+            String alamat = jTable1.getValueAt(selectedRow,2).toString();
+            String asalSekolah = jTable1.getValueAt(selectedRow,3).toString();
+            Object jenisKelamin = jTable1.getValueAt(selectedRow,4);
+            String email = jTable1.getValueAt(selectedRow,5).toString();
+            String telpon = jTable1.getValueAt(selectedRow,6).toString();
+            
+            fieldNama.setText(nama);
+            fieldAlamat.setText(alamat);
+            fieldAsalSekolah.setText(asalSekolah);
+            jenisKel.setSelectedItem(jenisKelamin);
+            fieldEmail.setText(email);
+            fieldTelpon.setText(telpon);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -330,8 +351,8 @@ public class Form extends javax.swing.JFrame {
     private javax.swing.JTextField fieldNama;
     private javax.swing.JTextField fieldTelpon;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jTableMouseClicked;
     private javax.swing.JComboBox<String> jenisKel;
     private javax.swing.JLabel lblAlamat;
     private javax.swing.JLabel lblAsalSekolah;
@@ -342,4 +363,11 @@ public class Form extends javax.swing.JFrame {
     private javax.swing.JButton save;
     // End of variables declaration//GEN-END:variables
 
+    private void resetForm(){
+        fieldNama.setText("");
+        fieldAlamat.setText("");
+        fieldAsalSekolah.setText("");
+        fieldEmail.setText("");
+        fieldTelpon.setText("");
+    }
 }
