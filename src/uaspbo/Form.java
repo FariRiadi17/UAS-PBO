@@ -3,6 +3,7 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -24,7 +25,37 @@ public class Form extends javax.swing.JFrame {
     public Form() {
         initComponents();
         conn = Connection.koneksi();
+        getData();
     }
+    
+    private void getData(){
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        
+        try{
+            String sql = "select * From mahasiswa";
+            PreparedStatement st = conn.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            
+            while(rs.next()){
+                int id = rs.getInt("No");
+                String nama = rs.getString("nama");
+                String alamat = rs.getString("alamat");
+                String asalSekolah = rs.getString("asal_sekolah");
+                String jenisKelamin = rs.getString("jns_klmn");
+                String email = rs.getString("email");
+                int telpon = rs.getInt("no_telp");
+                
+                Object[] rowData = {id,nama,alamat, asalSekolah,jenisKelamin,email,telpon};
+                model.addRow(rowData);
+            }
+            rs.close();
+            st.close();
+        }   catch (Exception e){
+                Logger.getLogger(Form.class.getName()).log(Level.SEVERE,null,e);
+        }
+       
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -311,11 +342,4 @@ public class Form extends javax.swing.JFrame {
     private javax.swing.JButton save;
     // End of variables declaration//GEN-END:variables
 
-    private void resetForm() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void getData() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }
