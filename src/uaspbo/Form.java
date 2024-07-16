@@ -1,4 +1,8 @@
 package uaspbo;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -15,11 +19,11 @@ public class Form extends javax.swing.JFrame {
      * Creates new form Form
      */
     
-    private Connection conn;
+    private java.sql.Connection conn;
     
     public Form() {
         initComponents();
-        conn.koneksi();
+        conn = Connection.koneksi();
     }
 
     /**
@@ -37,19 +41,16 @@ public class Form extends javax.swing.JFrame {
         lblAlamat = new javax.swing.JLabel();
         lblAsalSekolah = new javax.swing.JLabel();
         fieldAlamat = new javax.swing.JTextField();
-        fieldAsalSekolah1 = new javax.swing.JTextField();
         lblTglLhr1 = new javax.swing.JLabel();
-        dotLaki = new javax.swing.JRadioButton();
-        dotPerempuan = new javax.swing.JRadioButton();
-        lblTglLhr2 = new javax.swing.JLabel();
-        fieldAsalSekolah2 = new javax.swing.JTextField();
+        fieldAsalSekolah = new javax.swing.JTextField();
         lblTglLhr3 = new javax.swing.JLabel();
-        fieldAsalSekolah3 = new javax.swing.JTextField();
+        fieldEmail = new javax.swing.JTextField();
         lblTglLhr4 = new javax.swing.JLabel();
-        fieldAsalSekolah4 = new javax.swing.JTextField();
+        fieldTelpon = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         save = new javax.swing.JButton();
+        jenisKel = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,51 +75,39 @@ public class Form extends javax.swing.JFrame {
             }
         });
 
-        fieldAsalSekolah1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldAsalSekolah1ActionPerformed(evt);
-            }
-        });
-
         lblTglLhr1.setText("JENIS KELAMIN");
 
-        dotLaki.setText("Laki-laki");
-
-        dotPerempuan.setText("Perempuan");
-
-        lblTglLhr2.setText("NEM");
-
-        fieldAsalSekolah2.addActionListener(new java.awt.event.ActionListener() {
+        fieldAsalSekolah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldAsalSekolah2ActionPerformed(evt);
+                fieldAsalSekolahActionPerformed(evt);
             }
         });
 
         lblTglLhr3.setText("EMAIL");
 
-        fieldAsalSekolah3.addActionListener(new java.awt.event.ActionListener() {
+        fieldEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldAsalSekolah3ActionPerformed(evt);
+                fieldEmailActionPerformed(evt);
             }
         });
 
         lblTglLhr4.setText("NO. TELPON");
 
-        fieldAsalSekolah4.addActionListener(new java.awt.event.ActionListener() {
+        fieldTelpon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldAsalSekolah4ActionPerformed(evt);
+                fieldTelponActionPerformed(evt);
             }
         });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "No", "Nama", "Alamat", "Asal Sekolah", "Jenis Kelamin", "Email", "No. Telpon", "NEM"
+                "No", "Nama", "Alamat", "Asal Sekolah", "Jenis Kelamin", "Email", "No. Telpon"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -127,6 +116,13 @@ public class Form extends javax.swing.JFrame {
         save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveActionPerformed(evt);
+            }
+        });
+
+        jenisKel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laki laki", "Perempuan" }));
+        jenisKel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jenisKelActionPerformed(evt);
             }
         });
 
@@ -153,20 +149,15 @@ public class Form extends javax.swing.JFrame {
                                             .addComponent(lblAlamat)
                                             .addComponent(lblAsalSekolah))
                                         .addComponent(lblTglLhr3, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblTglLhr4, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblTglLhr2, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addComponent(lblTglLhr4, javax.swing.GroupLayout.Alignment.LEADING))
                                     .addGap(28, 28, 28)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(fieldAlamat)
+                                        .addComponent(fieldAlamat, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
                                         .addComponent(fieldNama)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(dotPerempuan)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(dotLaki))
-                                        .addComponent(fieldAsalSekolah2)
-                                        .addComponent(fieldAsalSekolah3)
-                                        .addComponent(fieldAsalSekolah4)
-                                        .addComponent(fieldAsalSekolah1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addComponent(fieldAsalSekolah)
+                                        .addComponent(fieldEmail)
+                                        .addComponent(fieldTelpon)
+                                        .addComponent(jenisKel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
                 .addContainerGap(249, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -185,29 +176,24 @@ public class Form extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAsalSekolah)
-                    .addComponent(fieldAsalSekolah2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fieldAsalSekolah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTglLhr1)
-                    .addComponent(dotPerempuan)
-                    .addComponent(dotLaki))
+                    .addComponent(jenisKel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fieldAsalSekolah3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTglLhr3))
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTglLhr4)
-                    .addComponent(fieldAsalSekolah4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTglLhr2)
-                    .addComponent(fieldAsalSekolah1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
+                    .addComponent(fieldTelpon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(save)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
@@ -221,25 +207,55 @@ public class Form extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldAlamatActionPerformed
 
-    private void fieldAsalSekolah1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldAsalSekolah1ActionPerformed
+    private void fieldAsalSekolahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldAsalSekolahActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_fieldAsalSekolah1ActionPerformed
+    }//GEN-LAST:event_fieldAsalSekolahActionPerformed
 
-    private void fieldAsalSekolah2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldAsalSekolah2ActionPerformed
+    private void fieldEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_fieldAsalSekolah2ActionPerformed
+    }//GEN-LAST:event_fieldEmailActionPerformed
 
-    private void fieldAsalSekolah3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldAsalSekolah3ActionPerformed
+    private void fieldTelponActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldTelponActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_fieldAsalSekolah3ActionPerformed
-
-    private void fieldAsalSekolah4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldAsalSekolah4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldAsalSekolah4ActionPerformed
+    }//GEN-LAST:event_fieldTelponActionPerformed
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
-        // TODO add your handling code here:
+        String nama = fieldNama.getText();
+        String alamat = fieldAlamat.getText();
+        String asalSekolah = fieldAsalSekolah.getText();
+        int index = jenisKel.getSelectedIndex();
+        String jenisKelamin = jenisKel.getItemAt(index);
+        String email = fieldEmail.getText();
+        int telpon = Integer.parseInt(fieldTelpon.getText());
+        
+        try {
+            String sql = "INSERT INTO mahasiswa (nama,alamat,asal_sekolah,jns_klmn,email,no_telp) VALUES (?,?,?,?,?,?)";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            
+            stmt.setString(1, nama);
+            stmt.setString(2, alamat);
+            stmt.setString(3, asalSekolah);
+            stmt.setString(4, jenisKelamin);
+            stmt.setString(5, email);
+            stmt.setInt(6, telpon);
+            
+            int rowInserted = stmt.executeUpdate();
+            if(rowInserted > 0) {
+                JOptionPane.showMessageDialog(this, "Data berhasil Ditambahkan");
+                resetForm();
+                getData();
+        }
+        } catch (Exception e) {
+            Logger.getLogger(Form.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+            
+       
     }//GEN-LAST:event_saveActionPerformed
+
+    private void jenisKelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jenisKelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jenisKelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,24 +293,29 @@ public class Form extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton dotLaki;
-    private javax.swing.JRadioButton dotPerempuan;
     private javax.swing.JTextField fieldAlamat;
-    private javax.swing.JTextField fieldAsalSekolah1;
-    private javax.swing.JTextField fieldAsalSekolah2;
-    private javax.swing.JTextField fieldAsalSekolah3;
-    private javax.swing.JTextField fieldAsalSekolah4;
+    private javax.swing.JTextField fieldAsalSekolah;
+    private javax.swing.JTextField fieldEmail;
     private javax.swing.JTextField fieldNama;
+    private javax.swing.JTextField fieldTelpon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JComboBox<String> jenisKel;
     private javax.swing.JLabel lblAlamat;
     private javax.swing.JLabel lblAsalSekolah;
     private javax.swing.JLabel lblNama;
     private javax.swing.JLabel lblTglLhr1;
-    private javax.swing.JLabel lblTglLhr2;
     private javax.swing.JLabel lblTglLhr3;
     private javax.swing.JLabel lblTglLhr4;
     private javax.swing.JButton save;
     // End of variables declaration//GEN-END:variables
+
+    private void resetForm() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void getData() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
