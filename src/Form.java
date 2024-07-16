@@ -35,6 +35,15 @@ public class Form extends javax.swing.JFrame {
         lblTglLhr1 = new javax.swing.JLabel();
         dotLaki = new javax.swing.JRadioButton();
         dotPerempuan = new javax.swing.JRadioButton();
+        lblTglLhr2 = new javax.swing.JLabel();
+        fieldAsalSekolah2 = new javax.swing.JTextField();
+        lblTglLhr3 = new javax.swing.JLabel();
+        fieldAsalSekolah3 = new javax.swing.JTextField();
+        lblTglLhr4 = new javax.swing.JLabel();
+        fieldAsalSekolah4 = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        save = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,6 +80,50 @@ public class Form extends javax.swing.JFrame {
 
         dotPerempuan.setText("Perempuan");
 
+        lblTglLhr2.setText("NEM");
+
+        fieldAsalSekolah2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldAsalSekolah2ActionPerformed(evt);
+            }
+        });
+
+        lblTglLhr3.setText("EMAIL");
+
+        fieldAsalSekolah3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldAsalSekolah3ActionPerformed(evt);
+            }
+        });
+
+        lblTglLhr4.setText("NO. TELPON");
+
+        fieldAsalSekolah4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldAsalSekolah4ActionPerformed(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "No", "Nama", "Alamat", "Asal Sekolah", "Jenis Kelamin", "Email", "No. Telpon", "NEM"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        save.setText("Save");
+        save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -82,22 +135,33 @@ public class Form extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(55, 55, 55)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblTglLhr1)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblNama)
-                                .addComponent(lblAlamat)
-                                .addComponent(lblAsalSekolah)))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(fieldAsalSekolah1, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                            .addComponent(fieldAlamat, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                            .addComponent(fieldNama, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(dotPerempuan)
-                                .addGap(18, 18, 18)
-                                .addComponent(dotLaki)))))
-                .addContainerGap(402, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(save)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(lblTglLhr1)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblNama)
+                                            .addComponent(lblAlamat)
+                                            .addComponent(lblAsalSekolah))
+                                        .addComponent(lblTglLhr3, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblTglLhr4, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblTglLhr2, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addGap(28, 28, 28)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(fieldAlamat)
+                                        .addComponent(fieldNama)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(dotPerempuan)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(dotLaki))
+                                        .addComponent(fieldAsalSekolah2)
+                                        .addComponent(fieldAsalSekolah3)
+                                        .addComponent(fieldAsalSekolah4)
+                                        .addComponent(fieldAsalSekolah1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addContainerGap(249, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,13 +179,29 @@ public class Form extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAsalSekolah)
-                    .addComponent(fieldAsalSekolah1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fieldAsalSekolah2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTglLhr1)
                     .addComponent(dotPerempuan)
                     .addComponent(dotLaki))
-                .addContainerGap(387, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fieldAsalSekolah3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTglLhr3))
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTglLhr4)
+                    .addComponent(fieldAsalSekolah4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTglLhr2)
+                    .addComponent(fieldAsalSekolah1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addComponent(save)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -138,6 +218,22 @@ public class Form extends javax.swing.JFrame {
     private void fieldAsalSekolah1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldAsalSekolah1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldAsalSekolah1ActionPerformed
+
+    private void fieldAsalSekolah2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldAsalSekolah2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldAsalSekolah2ActionPerformed
+
+    private void fieldAsalSekolah3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldAsalSekolah3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldAsalSekolah3ActionPerformed
+
+    private void fieldAsalSekolah4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldAsalSekolah4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldAsalSekolah4ActionPerformed
+
+    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,11 +275,20 @@ public class Form extends javax.swing.JFrame {
     private javax.swing.JRadioButton dotPerempuan;
     private javax.swing.JTextField fieldAlamat;
     private javax.swing.JTextField fieldAsalSekolah1;
+    private javax.swing.JTextField fieldAsalSekolah2;
+    private javax.swing.JTextField fieldAsalSekolah3;
+    private javax.swing.JTextField fieldAsalSekolah4;
     private javax.swing.JTextField fieldNama;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblAlamat;
     private javax.swing.JLabel lblAsalSekolah;
     private javax.swing.JLabel lblNama;
     private javax.swing.JLabel lblTglLhr1;
+    private javax.swing.JLabel lblTglLhr2;
+    private javax.swing.JLabel lblTglLhr3;
+    private javax.swing.JLabel lblTglLhr4;
+    private javax.swing.JButton save;
     // End of variables declaration//GEN-END:variables
 }
