@@ -1,8 +1,11 @@
 package uaspbo;
+import java.awt.HeadlessException;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -82,6 +85,7 @@ public class Form extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         save = new javax.swing.JButton();
         jenisKel = new javax.swing.JComboBox<>();
+        btnHapus = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -162,6 +166,13 @@ public class Form extends javax.swing.JFrame {
             }
         });
 
+        btnHapus.setText("Delete");
+        btnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -176,7 +187,10 @@ public class Form extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTableMouseClicked, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(save)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(save))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(lblTglLhr1)
@@ -226,7 +240,9 @@ public class Form extends javax.swing.JFrame {
                     .addComponent(lblTglLhr4)
                     .addComponent(fieldTelpon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(save)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(save)
+                    .addComponent(btnHapus))
                 .addGap(18, 18, 18)
                 .addComponent(jTableMouseClicked, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(42, Short.MAX_VALUE))
@@ -309,6 +325,39 @@ public class Form extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
+    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = jTable1.getSelectedRow();
+        if(selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Pilih baris yang akan dihapus");
+            return;
+        }
+        
+        int confirm = JOptionPane.showConfirmDialog(this, "Yakin?");
+        
+        if(confirm == JOptionPane.YES_OPTION) {
+            String id = jTable1.getValueAt(selectedRow, 0).toString();
+            
+            try {
+                String sql = "DELETE FROM MAHASISWA WHERE No = ?";
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setString(1, id);
+                
+                int rowDelete = stmt.executeUpdate();
+                
+                if(rowDelete > 0) {
+                    JOptionPane.showMessageDialog(this, "Data berhasil dihapus");
+                    resetForm();
+                    getData();
+                }
+                
+                stmt.close();
+            } catch(HeadlessException | SQLException e) {
+                Logger.getLogger(Form.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+    }//GEN-LAST:event_btnHapusActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -345,6 +394,7 @@ public class Form extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnHapus;
     private javax.swing.JTextField fieldAlamat;
     private javax.swing.JTextField fieldAsalSekolah;
     private javax.swing.JTextField fieldEmail;
