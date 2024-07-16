@@ -335,6 +335,8 @@ public class Form extends javax.swing.JFrame {
             fieldEmail.setText(email);
             fieldTelpon.setText(telpon);
         }
+        
+        hiddenBtn(false);
     }//GEN-LAST:event_jTable1MouseClicked
 
     
