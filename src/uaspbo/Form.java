@@ -1,8 +1,11 @@
 package uaspbo;
+import java.awt.HeadlessException;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -66,8 +69,6 @@ public class Form extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton2 = new javax.swing.JButton();
-        btnEdit = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lblNama = new javax.swing.JLabel();
         fieldNama = new javax.swing.JTextField();
@@ -85,17 +86,9 @@ public class Form extends javax.swing.JFrame {
         save = new javax.swing.JButton();
         jenisKel = new javax.swing.JComboBox<>();
         btnHapus = new javax.swing.JButton();
-
-        jButton2.setText("jButton2");
+        btnEdit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        btnEdit.setText("Edit");
-        btnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditActionPerformed(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("REGISTRASI MAHASISWA");
@@ -181,6 +174,13 @@ public class Form extends javax.swing.JFrame {
             }
         });
 
+        btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -194,29 +194,30 @@ public class Form extends javax.swing.JFrame {
                         .addGap(55, 55, 55)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTableMouseClicked, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblTglLhr1)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblNama)
-                                        .addComponent(lblAlamat)
-                                        .addComponent(lblAsalSekolah))
-                                    .addComponent(lblTglLhr3, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblTglLhr4, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(28, 28, 28)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(save)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnEdit))
-                                    .addComponent(fieldAlamat, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                                    .addComponent(fieldNama)
-                                    .addComponent(fieldAsalSekolah)
-                                    .addComponent(fieldEmail)
-                                    .addComponent(fieldTelpon)
-                                    .addComponent(jenisKel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addComponent(btnHapus)))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnEdit)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(save))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(lblTglLhr1)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblNama)
+                                            .addComponent(lblAlamat)
+                                            .addComponent(lblAsalSekolah))
+                                        .addComponent(lblTglLhr3, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblTglLhr4, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addGap(28, 28, 28)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(fieldAlamat, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                                        .addComponent(fieldNama)
+                                        .addComponent(fieldAsalSekolah)
+                                        .addComponent(fieldEmail)
+                                        .addComponent(fieldTelpon)
+                                        .addComponent(jenisKel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
                 .addContainerGap(249, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -248,14 +249,14 @@ public class Form extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTglLhr4)
                     .addComponent(fieldTelpon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(13, 13, 13)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(save)
-                    .addComponent(btnEdit)
-                    .addComponent(btnHapus))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(btnHapus)
+                    .addComponent(btnEdit))
+                .addGap(18, 18, 18)
                 .addComponent(jTableMouseClicked, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
@@ -398,8 +399,39 @@ public class Form extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+                                          
+
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
         // TODO add your handling code here:
+        int selectedRow = jTable1.getSelectedRow();
+        if(selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Pilih baris yang akan dihapus");
+            return;
+        }
+        
+        int confirm = JOptionPane.showConfirmDialog(this, "Yakin?");
+        
+        if(confirm == JOptionPane.YES_OPTION) {
+            String id = jTable1.getValueAt(selectedRow, 0).toString();
+            
+            try {
+                String sql = "DELETE FROM MAHASISWA WHERE No = ?";
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setString(1, id);
+                
+                int rowDelete = stmt.executeUpdate();
+                
+                if(rowDelete > 0) {
+                    JOptionPane.showMessageDialog(this, "Data berhasil dihapus");
+                    resetForm();
+                    getData();
+                }
+                
+                stmt.close();
+            } catch(HeadlessException | SQLException e) {
+                Logger.getLogger(Form.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
     }//GEN-LAST:event_btnHapusActionPerformed
 
     /**
@@ -445,7 +477,6 @@ public class Form extends javax.swing.JFrame {
     private javax.swing.JTextField fieldEmail;
     private javax.swing.JTextField fieldNama;
     private javax.swing.JTextField fieldTelpon;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTable jTable1;
     private javax.swing.JScrollPane jTableMouseClicked;
