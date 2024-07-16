@@ -15,6 +15,8 @@ public class UASPBO {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Form form = new Form();
+        form.setVisible(true);
     }
     
 }

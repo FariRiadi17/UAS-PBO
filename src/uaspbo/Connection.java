@@ -10,25 +10,26 @@ import java.sql.*;
  */
 public class Connection {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://127.0.0.1:3306";
+    static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/uas-pbo";
     static final String USER = "root";
     static final String PASS = "";
     
     public static java.sql.Connection conn;
     public static Statement stmt;
     public static ResultSet rs;
- 
-    public static void koneksi()
+
+    public static java.sql.Connection koneksi()
     {
         try{
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            stmt = conn.createStatement();
-            
+            return conn;
         }
         catch(Exception e)
         {
             e.printStackTrace();
         }
+        
+        return conn;
     }
 }
