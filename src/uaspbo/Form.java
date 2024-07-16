@@ -1,3 +1,5 @@
+package uaspbo;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -12,8 +14,12 @@ public class Form extends javax.swing.JFrame {
     /**
      * Creates new form Form
      */
+    
+    private Connection conn;
+    
     public Form() {
         initComponents();
+        conn.koneksi();
     }
 
     /**
